@@ -13,9 +13,13 @@ const mikroOrmConfig: Options<PostgreSqlDriver> = {
   password: environment.dbPassword,
   dbName: environment.dbDatabase,
   type: 'postgresql',
-  migrations: { pathTs: './src/migrations', path: './dist/migrations', emit: 'ts' },
-  entities: ['./dist/4-model/entity/*.entity.ts'],
-  entitiesTs: ['./src/4-model/entity/*.entity.js'],
+  migrations: {
+    pathTs: './src/5-infrastructure/database/migrations',
+    path: './dist/5-infrastructure/database/migrations',
+    emit: 'ts',
+  },
+  entities: ['./dist/4-model/entity/*.entity.js'],
+  entitiesTs: ['./src/4-model/entity/*.entity.ts'],
   namingStrategy: NamingStrategy,
   discovery: { warnWhenNoEntities: false },
 };
