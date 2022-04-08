@@ -6,8 +6,8 @@ import helmet from 'helmet';
 
 import { version } from '../package.json';
 
+import { Environment } from './6-shared/environment/environment';
 import { AppModule } from './app.module';
-import { Environment } from './environment/environment';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
