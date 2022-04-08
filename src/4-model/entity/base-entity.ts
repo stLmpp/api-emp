@@ -1,4 +1,4 @@
-import { Entity, PrimaryKey, Property, BaseEntity as MikroOrmBaseEntity } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 import { SoftDeletable } from 'mikro-orm-soft-delete';
 
 import { MapProp } from '../../6-shared/mapper/map-prop.decorator';
@@ -7,7 +7,7 @@ import { MapProp } from '../../6-shared/mapper/map-prop.decorator';
 // @ts-ignore
 @SoftDeletable(() => BaseEntity, 'deletedAt', () => new Date())
 @Entity({ abstract: true })
-export abstract class BaseEntity extends MikroOrmBaseEntity<BaseEntity, 'id'> {
+export abstract class BaseEntity {
   @MapProp()
   @PrimaryKey({ type: 'uuid', defaultRaw: 'uuid_generate_v4()' })
   id!: string;
@@ -23,4 +23,9 @@ export abstract class BaseEntity extends MikroOrmBaseEntity<BaseEntity, 'id'> {
   @MapProp()
   @Property({ nullable: true })
   deletedAt?: Date;
+
+  fromDto(dto: Omit<this, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'fromDto'>): this {
+    Object.assign(this, { ...dto });
+    return this;
+  }
 }

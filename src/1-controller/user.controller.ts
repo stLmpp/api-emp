@@ -1,15 +1,25 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { UserService } from '../2-service/user.service';
+import { UserCreateDto } from '../4-model/dto/user-create.dto';
 import { UserEntity } from '../4-model/entity/user.entity';
 import { UserWithValuesViewModel } from '../4-model/view-model/user-with-values.view-model';
+import { UserViewModel } from '../4-model/view-model/user.view-model';
 import { MapperService } from '../6-shared/mapper/mapper.service';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService, private readonly mapperService: MapperService) {
-    setTimeout(() => {
-      console.log(this.mapperService.get(UserEntity, UserWithValuesViewModel));
-    }, 1000);
+  constructor(private readonly userService: UserService, private readonly mapperService: MapperService) {}
+
+  @Post()
+  async create(@Body() dto: UserCreateDto): Promise<UserViewModel> {
+    return this.mapperService.map(UserEntity, UserViewModel, await this.userService.create(dto));
+  }
+
+  @Get('values')
+  async getAllWithValues(): Promise<UserWithValuesViewModel[]> {
+    return this.mapperService.map(UserEntity, UserWithValuesViewModel, await this.userService.getAllWithValues());
   }
 }

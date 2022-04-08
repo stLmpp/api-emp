@@ -22,6 +22,7 @@ const mikroOrmConfig: Options<PostgreSqlDriver> = {
   entitiesTs: ['./src/4-model/entity/*.entity.ts'],
   namingStrategy: NamingStrategy,
   discovery: { warnWhenNoEntities: false },
+  debug: !environment.production,
 };
 
 export default mikroOrmConfig;
