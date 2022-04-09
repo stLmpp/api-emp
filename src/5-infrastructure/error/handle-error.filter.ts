@@ -1,4 +1,9 @@
-import { DatabaseObjectNotFoundException, DriverException, UniqueConstraintViolationException } from '@mikro-orm/core';
+import {
+  DatabaseObjectNotFoundException,
+  DriverException,
+  NotFoundError,
+  UniqueConstraintViolationException,
+} from '@mikro-orm/core';
 import {
   ArgumentsHost,
   Catch,
@@ -21,9 +26,11 @@ export class HandleErrorFilter extends BaseExceptionFilter {
     (exception: DriverException) => HttpException
   >()
     .set(UniqueConstraintViolationException, ({ message }) => new ConflictException(message))
-    .set(DatabaseObjectNotFoundException, ({ message }) => new NotFoundException(message));
+    .set(DatabaseObjectNotFoundException, ({ message }) => new NotFoundException(message))
+    .set(NotFoundError, ({ message }) => new NotFoundException(message));
 
   override catch(exception: any, host: ArgumentsHost): void {
+    this._logger.error(exception);
     const applicationRef = this.applicationRef ?? this.httpAdapterHost?.httpAdapter;
     if (!applicationRef) {
       super.catch(exception, host);

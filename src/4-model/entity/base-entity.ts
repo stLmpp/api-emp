@@ -24,7 +24,12 @@ export abstract class BaseEntity {
   @Property({ nullable: true })
   deletedAt?: Date;
 
-  fromDto(dto: Omit<this, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'fromDto'>): this {
+  fromDto(dto: Omit<this, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'fromDto' | 'extendDto'>): this {
+    Object.assign(this, { ...dto });
+    return this;
+  }
+
+  extendDto(dto: Partial<Omit<this, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'fromDto' | 'extendDto'>>): this {
     Object.assign(this, { ...dto });
     return this;
   }
