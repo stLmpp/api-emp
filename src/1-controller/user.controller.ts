@@ -34,4 +34,11 @@ export class UserController {
   async getAllWithValues(): Promise<UserWithValuesViewModel[]> {
     return this.mapperService.map(UserEntity, UserWithValuesViewModel, await this.userService.getAllWithValues());
   }
+
+  @Get(`:${RouteParamEnum.idUser}/exists`)
+  async exists(
+    @Param(RouteParamEnum.idUser) idUser: string
+  ): Promise<boolean> {
+    return this.userService.exists(idUser);
+  }
 }

@@ -56,8 +56,8 @@
       "checks": [
         {
           "name": "user_id_check",
-          "expression": "id ~ '^[a-zA-Z][-_a-zA-Z0-9]{3,28}[a-zA-Z0-9]$'",
-          "definition": "check ((id ~ '^[a-zA-Z][-_a-zA-Z0-9]{3,28}[a-zA-Z0-9]$'))",
+          "expression": "id ~ '^[a-zA-Z][-_a-zA-Z0-9]{1,28}[a-zA-Z0-9]$'",
+          "definition": "check ((id ~ '^[a-zA-Z][-_a-zA-Z0-9]{1,28}[a-zA-Z0-9]$'))",
           "columnName": "id"
         }
       ],

@@ -34,4 +34,8 @@ export class UserService {
     const entity = await this.userRepository.findOneOrFail(id);
     await this.userRepository.remove(entity).flush();
   }
+
+  async exists(id: string): Promise<boolean> {
+    return this.userRepository.exists(id);
+  }
 }
