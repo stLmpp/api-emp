@@ -38,7 +38,7 @@ export class Environment {
 
   @EnvProp() nodeEnv!: string;
   @EnvProp({ defaultValue: 3000 }) port!: number;
-  @EnvProp({ defaultValue: '127.0.0.0' }) host!: string;
+  @EnvProp({ defaultValue: '0.0.0.0' }) host!: string;
   @EnvProp() dbPassword!: string;
   @EnvProp() dbUsername!: string;
   @EnvProp() dbDatabase!: string;
