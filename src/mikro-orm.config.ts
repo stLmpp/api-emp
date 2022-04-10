@@ -29,6 +29,7 @@ const mikroOrmConfig: Options<PostgreSqlDriver> = {
   debug: !environment.production,
   highlighter: new SqlHighlighter(),
   logger: message => logger.log(message),
+  strict: true,
 };
 
 export default mikroOrmConfig;
