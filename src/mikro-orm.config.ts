@@ -1,4 +1,4 @@
-import { Options } from '@mikro-orm/core';
+import { LoadStrategy, Options } from '@mikro-orm/core';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 
@@ -30,6 +30,7 @@ const mikroOrmConfig: Options<PostgreSqlDriver> = {
   highlighter: new SqlHighlighter(),
   logger: message => logger.log(message),
   strict: true,
+  loadStrategy: LoadStrategy.JOINED,
 };
 
 export default mikroOrmConfig;

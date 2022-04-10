@@ -1,10 +1,20 @@
-import { Collection, Entity, IdentifiedReference, ManyToOne, OneToMany, Property } from '@mikro-orm/core';
+import {
+  Collection,
+  Entity,
+  EntityRepositoryType,
+  IdentifiedReference,
+  ManyToOne,
+  OneToMany,
+  Property,
+} from '@mikro-orm/core';
+
+import { TransactionRepository } from '../../3-repository/transaction.repository';
 
 import { BaseEntity } from './base-entity';
 import { PersonEntity } from './person.entity';
 import { TransactionItemEntity } from './transaction-item.entity';
 
-@Entity()
+@Entity({ customRepository: () => TransactionRepository })
 export class TransactionEntity extends BaseEntity {
   @Property()
   total!: number;
@@ -23,4 +33,6 @@ export class TransactionEntity extends BaseEntity {
 
   @OneToMany({ entity: () => TransactionItemEntity, mappedBy: 'transaction' })
   transactionItems = new Collection<TransactionItemEntity>(this);
+
+  [EntityRepositoryType]?: TransactionRepository;
 }

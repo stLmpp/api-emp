@@ -4,25 +4,24 @@ import { ApiTags } from '@nestjs/swagger';
 import { UserService } from '../2-service/user.service';
 import { UserCreateDto } from '../4-model/dto/user-create.dto';
 import { UserUpdateDto } from '../4-model/dto/user-update.dto';
-import { UserEntity } from '../4-model/entity/user.entity';
+import { UserEntityToUserViewModelMapper } from '../4-model/mapping/user.entity-to-user.view-model.mapper';
 import { UserWithValuesViewModel } from '../4-model/view-model/user-with-values.view-model';
 import { UserViewModel } from '../4-model/view-model/user.view-model';
-import { MapperService } from '../6-shared/mapper/mapper.service';
 import { RouteParamEnum } from '../6-shared/route/route-param.enum';
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService, private readonly mapperService: MapperService) {}
+  constructor(private readonly userService: UserService) {}
 
   @Post()
   async create(@Body() dto: UserCreateDto): Promise<UserViewModel> {
-    return this.mapperService.map(UserEntity, UserViewModel, await this.userService.create(dto));
+    return UserEntityToUserViewModelMapper.map(await this.userService.create(dto));
   }
 
   @Patch(`:${RouteParamEnum.idUser}`)
   async update(@Param(RouteParamEnum.idUser) idUser: string, @Body() dto: UserUpdateDto): Promise<UserViewModel> {
-    return this.mapperService.map(UserEntity, UserViewModel, await this.userService.update(idUser, dto));
+    return UserEntityToUserViewModelMapper.map(await this.userService.update(idUser, dto));
   }
 
   @Delete(`:${RouteParamEnum.idUser}`)
@@ -32,13 +31,11 @@ export class UserController {
 
   @Get('values')
   async getAllWithValues(): Promise<UserWithValuesViewModel[]> {
-    return this.mapperService.map(UserEntity, UserWithValuesViewModel, await this.userService.getAllWithValues());
+    return this.userService.getAllWithValues();
   }
 
   @Get(`:${RouteParamEnum.idUser}/exists`)
-  async exists(
-    @Param(RouteParamEnum.idUser) idUser: string
-  ): Promise<boolean> {
+  async exists(@Param(RouteParamEnum.idUser) idUser: string): Promise<boolean> {
     return this.userService.exists(idUser);
   }
 }

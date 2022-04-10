@@ -1,18 +1,15 @@
-import { MapProp } from '../../6-shared/mapper/map-prop.decorator';
-
 export class UserWithValuesViewModel {
-  @MapProp()
+  constructor(props?: UserWithValuesViewModel) {
+    Object.assign(this, props);
+  }
+
   id!: string;
 
-  @MapProp()
   totalToReceive!: number;
 
-  @MapProp()
   totalReceived!: number;
 
-  @MapProp()
   total!: number;
 
-  @MapProp()
   lastDateReceived!: Date;
 }
