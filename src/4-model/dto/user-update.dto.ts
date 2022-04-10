@@ -4,6 +4,6 @@ export class UserUpdateDto {
   @IsString()
   @IsOptional()
   @IsNotEmpty()
-  @MaxLength(150)
-  name?: string;
+  @MaxLength(30)
+  id?: string;
 }

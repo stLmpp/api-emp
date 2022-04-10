@@ -5,9 +5,6 @@ export class UserWithValuesViewModel {
   id!: string;
 
   @MapProp()
-  name!: string;
-
-  @MapProp()
   totalToReceive!: number;
 
   @MapProp()

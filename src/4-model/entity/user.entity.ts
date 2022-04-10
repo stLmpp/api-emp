@@ -1,16 +1,15 @@
-import { Entity, EntityRepositoryType, Property, Unique } from '@mikro-orm/core';
+import { Entity, EntityRepositoryType, PrimaryKey } from '@mikro-orm/core';
 
 import { UserRepository } from '../../3-repository/user.repository';
 import { MapProp } from '../../6-shared/mapper/map-prop.decorator';
 
-import { BaseEntity } from './base-entity';
+import { BaseEntityNoId } from './base-entity';
 
 @Entity({ customRepository: () => UserRepository })
-export class UserEntity extends BaseEntity {
+export class UserEntity extends BaseEntityNoId {
   @MapProp()
-  @Property({ length: 150 })
-  @Unique()
-  name!: string;
+  @PrimaryKey({ length: 30 })
+  id!: string;
 
   [EntityRepositoryType]?: UserRepository;
 }

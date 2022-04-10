@@ -4,6 +4,6 @@ export class UserCreateDto {
   @IsDefined()
   @IsString()
   @IsNotEmpty()
-  @MaxLength(150)
-  name!: string;
+  @MaxLength(30)
+  id!: string;
 }

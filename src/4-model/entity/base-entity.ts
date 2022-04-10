@@ -7,11 +7,7 @@ import { MapProp } from '../../6-shared/mapper/map-prop.decorator';
 // @ts-ignore
 @SoftDeletable(() => BaseEntity, 'deletedAt', () => new Date())
 @Entity({ abstract: true })
-export abstract class BaseEntity {
-  @MapProp()
-  @PrimaryKey({ type: 'uuid', defaultRaw: 'uuid_generate_v4()' })
-  id!: string;
-
+export abstract class BaseEntityNoId {
   @MapProp()
   @Property()
   createdAt: Date = new Date();
@@ -23,14 +19,12 @@ export abstract class BaseEntity {
   @MapProp()
   @Property({ nullable: true })
   deletedAt?: Date;
-
-  fromDto(dto: Omit<this, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'fromDto' | 'extendDto'>): this {
-    Object.assign(this, { ...dto });
-    return this;
-  }
-
-  extendDto(dto: Partial<Omit<this, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'fromDto' | 'extendDto'>>): this {
-    Object.assign(this, { ...dto });
-    return this;
-  }
 }
+
+@Entity({ abstract: true })
+export abstract class BaseEntity extends BaseEntityNoId {
+  @MapProp()
+  @PrimaryKey({ type: 'uuid', defaultRaw: 'uuid_generate_v4()' })
+  id!: string;
+}
+
