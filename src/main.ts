@@ -1,3 +1,4 @@
+import { MikroORM } from '@mikro-orm/core';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -7,10 +8,27 @@ import helmet from 'helmet';
 import { version } from '../package.json';
 
 import { Environment } from './6-shared/environment/environment';
+import { Logger } from './6-shared/logger/logger';
 import { AppModule } from './app.module';
 
+const logger = Logger.create('bootstrap');
+
 async function bootstrap(): Promise<void> {
+  logger.log('Bootstrapping application');
+
   const app = await NestFactory.create(AppModule);
+
+  const migrator = app.get(MikroORM).getMigrator();
+
+  logger.log('Getting pending migrations');
+
+  const pendingMigrations = await migrator.getPendingMigrations();
+
+  logger.log(`Found ${pendingMigrations.length} pending migrations`);
+
+  if (pendingMigrations.length) {
+    throw new Error(`There are pending migrations to run`);
+  }
 
   app.setGlobalPrefix('api').useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
@@ -28,7 +46,11 @@ async function bootstrap(): Promise<void> {
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(compression());
 
-  await app.listen(3000);
+  logger.log(`Starting to listen on port ${environment.port}`);
+
+  await app.listen(environment.port, environment.host);
+
+  logger.log(`Listening on port ${environment.port}`);
 }
 
 bootstrap().then();
