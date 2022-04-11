@@ -36,3 +36,4 @@ lerna-debug.log*
 
 .env
 package.json.yarn
+.snapshot-emp.json

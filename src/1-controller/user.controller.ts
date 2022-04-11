@@ -4,6 +4,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { UserService } from '../2-service/user.service';
 import { UserCreateDto } from '../4-model/dto/user-create.dto';
 import { UserUpdateDto } from '../4-model/dto/user-update.dto';
+import { UserEntityToUserWithValuesViewModelMapper } from '../4-model/mapping/user.entity-to-user-with-values.view-model.mapper';
 import { UserEntityToUserViewModelMapper } from '../4-model/mapping/user.entity-to-user.view-model.mapper';
 import { UserWithValuesViewModel } from '../4-model/view-model/user-with-values.view-model';
 import { UserViewModel } from '../4-model/view-model/user.view-model';
@@ -31,7 +32,7 @@ export class UserController {
 
   @Get('values')
   async getAllWithValues(): Promise<UserWithValuesViewModel[]> {
-    return this.userService.getAllWithValues();
+    return UserEntityToUserWithValuesViewModelMapper.map(await this.userService.getAllWithValues());
   }
 
   @Get(`:${RouteParamEnum.idUser}/exists`)

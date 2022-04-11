@@ -2,6 +2,7 @@ import {
   Collection,
   Entity,
   EntityRepositoryType,
+  Enum,
   IdentifiedReference,
   ManyToOne,
   OneToMany,
@@ -9,6 +10,7 @@ import {
 } from '@mikro-orm/core';
 
 import { TransactionRepository } from '../../3-repository/transaction.repository';
+import { TransactionType } from '../enum/transaction-type';
 
 import { BaseEntity } from './base-entity';
 import { PersonEntity } from './person.entity';
@@ -27,6 +29,9 @@ export class TransactionEntity extends BaseEntity {
 
   @Property()
   personId!: string;
+
+  @Enum(() => TransactionType)
+  type!: TransactionType;
 
   @ManyToOne({ entity: () => PersonEntity, wrappedReference: true })
   person!: IdentifiedReference<PersonEntity>;

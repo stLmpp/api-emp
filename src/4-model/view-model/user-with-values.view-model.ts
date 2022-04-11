@@ -10,6 +10,4 @@ export class UserWithValuesViewModel {
   totalReceived!: number;
 
   total!: number;
-
-  lastDateReceived!: Date;
 }
