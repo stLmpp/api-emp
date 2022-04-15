@@ -1,9 +1,9 @@
 import { Entity, EntityRepositoryType, IdentifiedReference, ManyToOne, Property } from '@mikro-orm/core';
 
-import { TransactionItemRepository } from '../../3-repository/transaction-item.repository';
-
 import { BaseEntity } from './base-entity';
 import { TransactionEntity } from './transaction.entity';
+
+import { TransactionItemRepository } from '@repository/transaction-item.repository';
 
 @Entity({ customRepository: () => TransactionItemRepository })
 export class TransactionItemEntity extends BaseEntity {

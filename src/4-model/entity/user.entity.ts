@@ -1,9 +1,9 @@
 import { Check, Collection, Entity, EntityRepositoryType, OneToMany, PrimaryKey } from '@mikro-orm/core';
 
-import { UserRepository } from '../../3-repository/user.repository';
-
 import { BaseEntityNoId } from './base-entity';
 import { PersonEntity } from './person.entity';
+
+import { UserRepository } from '@repository/user.repository';
 
 @Entity({ customRepository: () => UserRepository })
 export class UserEntity extends BaseEntityNoId {

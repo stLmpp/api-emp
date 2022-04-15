@@ -9,12 +9,13 @@ import {
   Property,
 } from '@mikro-orm/core';
 
-import { TransactionRepository } from '../../3-repository/transaction.repository';
 import { TransactionType } from '../enum/transaction/transaction-type';
 
 import { BaseEntity } from './base-entity';
 import { PersonEntity } from './person.entity';
 import { TransactionItemEntity } from './transaction-item.entity';
+
+import { TransactionRepository } from '@repository/transaction.repository';
 
 @Entity({ customRepository: () => TransactionRepository })
 export class TransactionEntity extends BaseEntity {

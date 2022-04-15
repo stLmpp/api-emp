@@ -8,11 +8,11 @@ import {
   Property,
 } from '@mikro-orm/core';
 
-import { PersonRepository } from '../../3-repository/person.repository';
-
 import { BaseEntity } from './base-entity';
 import { TransactionEntity } from './transaction.entity';
 import { UserEntity } from './user.entity';
+
+import { PersonRepository } from '@repository/person.repository';
 
 @Entity({ customRepository: () => PersonRepository })
 export class PersonEntity extends BaseEntity {

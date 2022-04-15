@@ -1,7 +1,5 @@
-import { PersonEntity } from '../4-model/entity/person.entity';
-
 import { BaseRepository } from './base-repository';
 
-export class PersonRepository extends BaseRepository<PersonEntity>{
-  
-}
+import { PersonEntity } from '@model/entity/person.entity';
+
+export class PersonRepository extends BaseRepository<PersonEntity> {}

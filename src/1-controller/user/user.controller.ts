@@ -1,16 +1,16 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiQuery } from '@nestjs/swagger';
 
-import { UserService } from '../../2-service/user/user.service';
-import { UserCreateDto } from '../../4-model/dto/user/user-create.dto';
-import { UserExistsParams } from '../../4-model/dto/user/user-exists.params';
-import { UserExistsQuery } from '../../4-model/dto/user/user-exists.query';
-import { UserUpdateDto } from '../../4-model/dto/user/user-update.dto';
-import { UserEntityToUserWithValuesViewModelMapper } from '../../4-model/mapping/user/user.entity-to-user-with-values.view-model.mapper';
-import { UserEntityToUserViewModelMapper } from '../../4-model/mapping/user/user.entity-to-user.view-model.mapper';
-import { UserWithValuesViewModel } from '../../4-model/view-model/user/user-with-values.view-model';
-import { UserViewModel } from '../../4-model/view-model/user/user.view-model';
-import { RouteParamEnum } from '../../6-shared/route/route-param.enum';
+import { UserCreateDto } from '@model/dto/user/user-create.dto';
+import { UserExistsParams } from '@model/dto/user/user-exists.params';
+import { UserExistsQuery } from '@model/dto/user/user-exists.query';
+import { UserUpdateDto } from '@model/dto/user/user-update.dto';
+import { UserEntityToUserWithValuesViewModelMapper } from '@model/mapping/user/user.entity-to-user-with-values.view-model.mapper';
+import { UserEntityToUserViewModelMapper } from '@model/mapping/user/user.entity-to-user.view-model.mapper';
+import { UserWithValuesViewModel } from '@model/view-model/user/user-with-values.view-model';
+import { UserViewModel } from '@model/view-model/user/user.view-model';
+import { UserService } from '@service/user/user.service';
+import { RouteParamEnum } from '@shared/route/route-param.enum';
 
 @ApiTags('User')
 @Controller('user')

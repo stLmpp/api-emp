@@ -2,9 +2,9 @@ import { LoadStrategy, Options } from '@mikro-orm/core';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 
-import { NamingStrategy } from './5-infrastructure/database/naming-strategy';
-import { Environment } from './6-shared/environment/environment';
-import { Logger } from './6-shared/logger/logger';
+import { NamingStrategy } from '@infrastructure/database/naming-strategy';
+import { Environment } from '@shared/environment/environment';
+import { Logger } from '@shared/logger/logger';
 
 const environment = Environment.getInstance();
 

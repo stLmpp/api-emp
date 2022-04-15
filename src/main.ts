@@ -8,9 +8,10 @@ import helmet from 'helmet';
 
 import { version } from '../package.json';
 
-import { Environment } from './6-shared/environment/environment';
-import { Logger } from './6-shared/logger/logger';
 import { AppModule } from './app.module';
+
+import { Environment } from '@shared/environment/environment';
+import { Logger } from '@shared/logger/logger';
 
 const logger = Logger.create('bootstrap');
 

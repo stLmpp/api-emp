@@ -20,6 +20,14 @@
     "noEmitOnError": true,
     "esModuleInterop": true,
     "strict": true,
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
+    "paths": {
+      "@controller/*": ["./src/1-controller/*"],
+      "@service/*": ["./src/2-service/*"],
+      "@repository/*": ["./src/3-repository/*"],
+      "@model/*": ["./src/4-model/*"],
+      "@infrastructure/*": ["./src/5-infrastructure/*"],
+      "@shared/*": ["./src/6-shared/*"]
+    }
   }
 }
