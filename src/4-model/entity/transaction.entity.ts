@@ -10,7 +10,7 @@ import {
 } from '@mikro-orm/core';
 
 import { TransactionRepository } from '../../3-repository/transaction.repository';
-import { TransactionType } from '../enum/transaction-type';
+import { TransactionType } from '../enum/transaction/transaction-type';
 
 import { BaseEntity } from './base-entity';
 import { PersonEntity } from './person.entity';

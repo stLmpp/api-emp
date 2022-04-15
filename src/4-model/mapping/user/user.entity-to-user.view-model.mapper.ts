@@ -1,7 +1,7 @@
 import { isArray } from 'st-utils';
 
-import { UserEntity } from '../entity/user.entity';
-import { UserViewModel } from '../view-model/user.view-model';
+import { UserEntity } from '../../entity/user.entity';
+import { UserViewModel } from '../../view-model/user/user.view-model';
 
 export class UserEntityToUserViewModelMapper {
   private static _mapOne(user: UserEntity): UserViewModel {

@@ -1,10 +1,10 @@
 import { wrap } from '@mikro-orm/core';
 import { ConflictException, Injectable } from '@nestjs/common';
 
-import { UserRepository } from '../3-repository/user.repository';
-import { UserCreateDto } from '../4-model/dto/user-create.dto';
-import { UserUpdateDto } from '../4-model/dto/user-update.dto';
-import { UserEntity } from '../4-model/entity/user.entity';
+import { UserRepository } from '../../3-repository/user.repository';
+import { UserCreateDto } from '../../4-model/dto/user/user-create.dto';
+import { UserUpdateDto } from '../../4-model/dto/user/user-update.dto';
+import { UserEntity } from '../../4-model/entity/user.entity';
 
 @Injectable()
 export class UserService {

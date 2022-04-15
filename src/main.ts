@@ -3,6 +3,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import compression from 'compression';
+import { NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 
 import { version } from '../package.json';
@@ -17,6 +18,11 @@ async function bootstrap(): Promise<void> {
   logger.log('Bootstrapping application');
 
   const app = await NestFactory.create(AppModule);
+
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    console.log({ query: req.query });
+    next();
+  });
 
   const migrator = app.get(MikroORM).getMigrator();
 
