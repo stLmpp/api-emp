@@ -28,7 +28,7 @@ export class UserService {
   async update(id: string, dto: UserUpdateDto): Promise<UserEntity> {
     const entity = await this.userRepository.findOneOrFail(id);
     wrap(entity).assign(dto);
-    await this.userRepository.flush();
+    await this.userRepository.nativeUpdate(id, dto);
     return entity;
   }
 
