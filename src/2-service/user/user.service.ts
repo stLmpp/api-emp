@@ -37,7 +37,12 @@ export class UserService {
     await this.userRepository.remove(entity).flush();
   }
 
-  async exists(id: string): Promise<boolean> {
-    return this.userRepository.exists(id);
+  async exists(id: string, exclude?: string[]): Promise<boolean> {
+    const query = this.userRepository.createQueryBuilder('user').select('id').andWhere({ id });
+    if (exclude?.length) {
+      query.andWhere({ id: { $nin: exclude } });
+    }
+    const user = await query.getSingleResult();
+    return !!user;
   }
 }

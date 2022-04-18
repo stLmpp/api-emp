@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { ApiTags, ApiQuery } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 
 import { UserCreateDto } from '@model/dto/user/user-create.dto';
 import { UserExistsParams } from '@model/dto/user/user-exists.params';
@@ -37,10 +37,8 @@ export class UserController {
     return UserEntityToUserWithValuesViewModelMapper.map(await this.userService.getAllWithValues());
   }
 
-  @ApiQuery({ name: 'exclude', isArray: true, type: 'string', style: 'form' })
   @Get(`:${RouteParamEnum.idUser}/exists`)
   async exists(@Param() { idUser }: UserExistsParams, @Query() { exclude }: UserExistsQuery): Promise<boolean> {
-    console.log({ exclude }); // TODO fix array in query params
-    return this.userService.exists(idUser);
+    return this.userService.exists(idUser, exclude);
   }
 }
