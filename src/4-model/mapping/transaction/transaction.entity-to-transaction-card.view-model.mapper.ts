@@ -20,7 +20,7 @@ export class TransactionEntityToTransactionCardViewModelMapper {
       idTransaction: transaction.id,
       date: transaction.date,
       personName: transaction.person.getProperty('name'),
-      transactionDescription: transaction.description,
+      description: transaction.description,
       totalReceived: 0,
       totalToReceive: 0,
       total: transaction.total,
