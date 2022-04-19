@@ -1,11 +1,31 @@
 import { Module } from '@nestjs/common';
+import { RouterModule } from '@nestjs/core';
 
-import { UserController } from './user/user.controller';
-
-import { ServiceModule } from '@service/service.module';
+import { TransactionControllerModule } from '@controller/transaction/transaction-controller.module';
+import { UserControllerModule } from '@controller/user/user-controller.module';
+import { RouteParamEnum } from '@shared/route/route-param.enum';
 
 @Module({
-  imports: [ServiceModule],
-  controllers: [UserController],
+  imports: [
+    UserControllerModule,
+    TransactionControllerModule,
+    RouterModule.register([
+      {
+        path: 'users',
+        module: UserControllerModule,
+        children: [
+          {
+            path: `:${RouteParamEnum.idUser}`,
+            children: [
+              {
+                path: 'transactions',
+                module: TransactionControllerModule,
+              },
+            ],
+          },
+        ],
+      },
+    ]),
+  ],
 })
 export class ControllerModule {}

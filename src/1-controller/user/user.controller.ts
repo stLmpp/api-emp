@@ -13,7 +13,7 @@ import { UserService } from '@service/user/user.service';
 import { RouteParamEnum } from '@shared/route/route-param.enum';
 
 @ApiTags('User')
-@Controller('user')
+@Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
