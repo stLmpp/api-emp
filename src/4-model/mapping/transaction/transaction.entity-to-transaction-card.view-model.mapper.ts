@@ -24,6 +24,7 @@ export class TransactionEntityToTransactionCardViewModelMapper {
       totalReceived: 0,
       totalToReceive: 0,
       total: transaction.total,
+      name: transaction.name,
     });
 
     for (const transactionItem of transaction.transactionItems) {

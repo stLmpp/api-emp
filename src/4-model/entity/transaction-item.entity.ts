@@ -1,20 +1,20 @@
-import { Entity, EntityRepositoryType, IdentifiedReference, ManyToOne, Property } from '@mikro-orm/core';
+import { Entity, EntityRepositoryType, IdentifiedReference, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
 
-import { BaseEntity } from './base-entity';
+import { BaseEntityNoId } from './base-entity';
 import { TransactionEntity } from './transaction.entity';
 
 import { TransactionItemRepository } from '@repository/transaction-item.repository';
 
 @Entity({ customRepository: () => TransactionItemRepository })
-export class TransactionItemEntity extends BaseEntity {
+export class TransactionItemEntity extends BaseEntityNoId {
+  @PrimaryKey({ length: 13 })
+  id!: string;
+
   @Property()
   value!: number;
 
   @Property()
   date!: Date;
-
-  @Property()
-  transactionId!: string;
 
   @ManyToOne({ entity: () => TransactionEntity, wrappedReference: true })
   transaction!: IdentifiedReference<TransactionEntity>;

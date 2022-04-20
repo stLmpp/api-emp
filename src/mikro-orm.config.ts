@@ -21,6 +21,7 @@ const mikroOrmConfig: Options<PostgreSqlDriver> = {
     pathTs: './src/5-infrastructure/database/migrations',
     path: './dist/5-infrastructure/database/migrations',
     emit: 'ts',
+    snapshot: false,
   },
   entities: ['./dist/4-model/entity/*.entity.js'],
   entitiesTs: ['./src/4-model/entity/*.entity.ts'],
@@ -31,6 +32,7 @@ const mikroOrmConfig: Options<PostgreSqlDriver> = {
   logger: message => logger.log(message),
   strict: true,
   loadStrategy: LoadStrategy.JOINED,
+  allowGlobalContext: true,
 };
 
 export default mikroOrmConfig;

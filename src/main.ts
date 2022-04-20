@@ -44,8 +44,7 @@ async function bootstrap(): Promise<void> {
     });
   }
 
-  app.use(helmet({ contentSecurityPolicy: false }));
-  app.use(compression());
+  app.use(helmet({ contentSecurityPolicy: false })).use(compression());
 
   logger.log(`Starting to listen on port ${environment.port}`);
 

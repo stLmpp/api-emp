@@ -20,7 +20,7 @@ export class UserService {
     if (await this.userRepository.exists({ id: dto.id })) {
       throw new ConflictException(`User with name "${dto.id}" already exists`);
     }
-    const entity = wrap(new UserEntity()).assign(dto);
+    const entity = new UserEntity({ id: dto.id });
     await this.userRepository.persistAndFlush(entity);
     return entity;
   }
@@ -34,7 +34,7 @@ export class UserService {
 
   async delete(id: string): Promise<void> {
     const entity = await this.userRepository.findOneOrFail(id);
-    await this.userRepository.remove(entity).flush();
+    await this.userRepository.removeAndFlush(entity);
   }
 
   async exists(id: string, exclude?: string[]): Promise<boolean> {
