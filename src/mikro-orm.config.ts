@@ -3,8 +3,8 @@ import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 
 import { NamingStrategy } from '@infrastructure/database/naming-strategy';
-import { Environment } from '@shared/environment/environment';
-import { Logger } from '@shared/logger/logger';
+import { Environment } from '@infrastructure/environment/environment';
+import { Logger } from '@infrastructure/logger/logger';
 
 const environment = Environment.getInstance();
 

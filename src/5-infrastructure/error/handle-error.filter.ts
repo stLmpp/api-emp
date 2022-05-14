@@ -15,7 +15,7 @@ import {
 import { BaseExceptionFilter } from '@nestjs/core';
 import { Class } from 'type-fest';
 
-import { Logger } from '@shared/logger/logger';
+import { Logger } from '@infrastructure/logger/logger';
 
 @Catch()
 export class HandleErrorFilter extends BaseExceptionFilter {

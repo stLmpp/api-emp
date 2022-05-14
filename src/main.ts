@@ -9,8 +9,8 @@ import { version } from '../package.json';
 
 import { AppModule } from './app.module';
 
-import { Environment } from '@shared/environment/environment';
-import { Logger } from '@shared/logger/logger';
+import { Environment } from '@infrastructure/environment/environment';
+import { Logger } from '@infrastructure/logger/logger';
 
 const logger = Logger.create('bootstrap');
 
