@@ -45,4 +45,8 @@ export class UserService {
     const user = await query.getSingleResult();
     return !!user;
   }
+
+  async getById(idUser: string): Promise<UserEntity> {
+    return this.userRepository.findOneOrFail(idUser);
+  }
 }

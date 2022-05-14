@@ -7,6 +7,4 @@ import { ServiceModule } from '@service/service.module';
   imports: [ServiceModule],
   controllers: [UserController],
 })
-export class UserControllerModule {
-  
-}
+export class UserControllerModule {}
