@@ -5,15 +5,15 @@ import {
   IdentifiedReference,
   ManyToOne,
   OneToMany,
-  PrimaryKey,
   Property,
   wrap,
 } from '@mikro-orm/core';
 
-import { BaseEntityNoId } from './base-entity';
+import { BaseEntity } from './base-entity';
 import { TransactionEntity } from './transaction.entity';
 import { UserEntity } from './user.entity';
 
+import { DefaultPrimaryKey } from '@model/decorator/default-primary-key';
 import { PersonRepository } from '@repository/person.repository';
 
 export interface PersonEntityArgs {
@@ -23,7 +23,7 @@ export interface PersonEntityArgs {
 }
 
 @Entity({ customRepository: () => PersonRepository })
-export class PersonEntity extends BaseEntityNoId {
+export class PersonEntity extends BaseEntity {
   constructor({ id, name, user }: PersonEntityArgs) {
     super();
     this.id = id;
@@ -31,7 +31,7 @@ export class PersonEntity extends BaseEntityNoId {
     this.user = wrap(user).toReference();
   }
 
-  @PrimaryKey({ length: 13 })
+  @DefaultPrimaryKey()
   id!: string;
 
   @Property({ length: 150 })

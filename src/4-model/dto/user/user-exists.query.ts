@@ -2,12 +2,12 @@ import { Transform } from 'class-transformer';
 import { IsArray, IsOptional } from 'class-validator';
 import { coerceArray, isNotNil } from 'st-utils';
 
-import { UserIdValidator } from './user-id.validator';
+import { IsUserId } from '@model/validation/is-user-id';
 
 export class UserExistsQuery {
   @IsOptional()
   @IsArray()
-  @UserIdValidator({ each: true })
+  @IsUserId({ each: true })
   @Transform(({ value }) => isNotNil(value) && coerceArray(value))
   exclude?: string[];
 }

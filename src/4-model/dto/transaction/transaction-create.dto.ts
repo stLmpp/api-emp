@@ -1,11 +1,23 @@
-import { IsDefined, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, MaxLength } from 'class-validator';
+import {
+  IsDefined,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPositive,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 import { TransactionType } from '@model/enum/transaction/transaction-type';
-import { IsDate } from '@shared/validation/is-date';
+import { IsDate } from '@model/validation/is-date';
+import { IsDefaultId } from '@model/validation/is-default-id';
 
 export class TransactionCreateDto {
   @IsDefined()
   @IsString()
+  @MinLength(3)
   @MaxLength(40)
   @IsNotEmpty()
   name!: string;
@@ -17,13 +29,13 @@ export class TransactionCreateDto {
   description?: string;
 
   @IsOptional()
-  @IsString()
-  @IsNotEmpty()
+  @IsDefaultId()
   idPerson?: string;
 
   @IsOptional()
   @IsString()
   @IsNotEmpty()
+  @MinLength(3)
   @MaxLength(150)
   personName?: string;
 

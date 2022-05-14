@@ -1,13 +1,14 @@
-import { Entity, EntityRepositoryType, IdentifiedReference, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, EntityRepositoryType, IdentifiedReference, ManyToOne, Property } from '@mikro-orm/core';
 
-import { BaseEntityNoId } from './base-entity';
+import { BaseEntity } from './base-entity';
 import { TransactionEntity } from './transaction.entity';
 
+import { DefaultPrimaryKey } from '@model/decorator/default-primary-key';
 import { TransactionItemRepository } from '@repository/transaction-item.repository';
 
 @Entity({ customRepository: () => TransactionItemRepository })
-export class TransactionItemEntity extends BaseEntityNoId {
-  @PrimaryKey({ length: 13 })
+export class TransactionItemEntity extends BaseEntity {
+  @DefaultPrimaryKey()
   id!: string;
 
   @Property()

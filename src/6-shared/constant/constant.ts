@@ -1,0 +1,1 @@
+export const DEFAULT_PRIMARY_KEY_LENGTH = 13;

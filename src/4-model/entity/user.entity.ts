@@ -1,6 +1,6 @@
 import { Collection, Entity, EntityRepositoryType, OneToMany, PrimaryKey } from '@mikro-orm/core';
 
-import { BaseEntityNoId } from './base-entity';
+import { BaseEntity } from './base-entity';
 import { PersonEntity } from './person.entity';
 
 import { UserRepository } from '@repository/user.repository';
@@ -10,7 +10,7 @@ export interface UserEntityArgs {
 }
 
 @Entity({ customRepository: () => UserRepository })
-export class UserEntity extends BaseEntityNoId {
+export class UserEntity extends BaseEntity {
   constructor({ id }: UserEntityArgs) {
     super();
     this.id = id;

@@ -6,17 +6,17 @@ import {
   IdentifiedReference,
   ManyToOne,
   OneToMany,
-  PrimaryKey,
   Property,
   wrap,
 } from '@mikro-orm/core';
 
 import { TransactionType } from '../enum/transaction/transaction-type';
 
-import { BaseEntityNoId } from './base-entity';
+import { BaseEntity } from './base-entity';
 import { PersonEntity } from './person.entity';
 import { TransactionItemEntity } from './transaction-item.entity';
 
+import { DefaultPrimaryKey } from '@model/decorator/default-primary-key';
 import { TransactionRepository } from '@repository/transaction.repository';
 
 export interface TransactionEntityArgs {
@@ -30,7 +30,7 @@ export interface TransactionEntityArgs {
 }
 
 @Entity({ customRepository: () => TransactionRepository })
-export class TransactionEntity extends BaseEntityNoId {
+export class TransactionEntity extends BaseEntity {
   constructor({ id, total, name, description, date, person, type }: TransactionEntityArgs) {
     super();
     this.id = id;
@@ -42,7 +42,7 @@ export class TransactionEntity extends BaseEntityNoId {
     this.type = type;
   }
 
-  @PrimaryKey({ length: 13 })
+  @DefaultPrimaryKey()
   id: string;
 
   @Property()

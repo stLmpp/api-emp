@@ -1,15 +1,19 @@
 import { normalizeString, random, sample } from 'st-utils';
 
+import { DEFAULT_PRIMARY_KEY_LENGTH } from '@shared/constant/constant';
+
 export class IdNormalizer {
   constructor(private id: string) {}
 
   private readonly _idOrigin = this.id;
-  private readonly _capAt = 13;
+  private readonly _capAt = DEFAULT_PRIMARY_KEY_LENGTH;
   private readonly _validCharRegex = /^[-_A-Za-z\d]$/;
   private readonly _possibleReplacements = [
-    'abcdefghijklmnopqrstuvwxyz',
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    'abcdefghijklm',
+    'ABCDEFGHIJKLM',
     '0123456789-_',
+    'nopqrstuvwxyz',
+    'NOPQRSTUVWXYZ',
   ].map(chunk => chunk.split(''));
 
   private _invalidCharacters = '';

@@ -3,9 +3,9 @@ import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsString, Matches, MaxLength, MinLength, ValidationOptions } from 'class-validator';
 import { isArray, isNil, uniq } from 'st-utils';
 
-import { UserEntity } from '../../entity/user.entity';
+import { UserEntity } from '@model/entity/user.entity';
 
-export function UserIdValidator(options?: ValidationOptions): PropertyDecorator {
+export function IsUserId(options?: ValidationOptions): PropertyDecorator {
   return applyDecorators(
     IsString(options),
     IsNotEmpty(options),
