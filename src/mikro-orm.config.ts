@@ -10,6 +10,8 @@ const environment = Environment.getInstance();
 
 const logger = Logger.create('MikroORM');
 
+const pathMigrationsTs = './src/5-infrastructure/database/migrations' as const;
+
 const mikroOrmConfig: Options<PostgreSqlDriver> = {
   host: environment.dbHost,
   port: environment.dbPort,
@@ -18,8 +20,8 @@ const mikroOrmConfig: Options<PostgreSqlDriver> = {
   dbName: environment.dbDatabase,
   type: 'postgresql',
   migrations: {
-    pathTs: './src/5-infrastructure/database/migrations',
-    path: './dist/5-infrastructure/database/migrations',
+    pathTs: pathMigrationsTs,
+    path: environment.production ? './dist/5-infrastructure/database/migrations' : pathMigrationsTs,
     emit: 'ts',
     snapshot: false,
   },

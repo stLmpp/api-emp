@@ -28,6 +28,7 @@ async function bootstrap(): Promise<void> {
   logger.log(`Found ${pendingMigrations.length} pending migrations`);
 
   if (pendingMigrations.length) {
+    logger.error(`There are pending migrations to run. Try running "mikro-orm migration:up"`);
     throw new Error(`There are pending migrations to run`);
   }
 
