@@ -18,7 +18,10 @@ export class TransactionService {
   async getCards(idUser: string): Promise<TransactionEntity[]> {
     return this.transactionRepository.find(
       { person: { user: { id: idUser } } },
-      { populate: ['person', 'transactionItems'] }
+      {
+        populate: ['person', 'transactionItems'],
+        orderBy: [{ date: 'DESC' }, { person: { name: 'ASC' } }, { total: 'DESC' }, { id: 'ASC' }],
+      }
     );
   }
 

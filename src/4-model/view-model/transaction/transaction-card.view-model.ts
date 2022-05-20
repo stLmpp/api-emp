@@ -4,6 +4,7 @@ export class TransactionCardViewModel {
   }
 
   idTransaction!: string;
+  idPerson!: string;
   personName!: string;
   name!: string;
   description?: string;
