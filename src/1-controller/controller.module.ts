@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { RouterModule } from '@nestjs/core';
 
 import { PersonControllerModule } from '@controller/person/person-controller.module';
+import { TransactionItemControllerModule } from '@controller/transaction-item/transaction-item-controller.module';
 import { TransactionControllerModule } from '@controller/transaction/transaction-controller.module';
 import { UserControllerModule } from '@controller/user/user-controller.module';
 import { RouteParamEnum } from '@shared/route/route-param.enum';
@@ -11,6 +12,7 @@ import { RouteParamEnum } from '@shared/route/route-param.enum';
     UserControllerModule,
     TransactionControllerModule,
     PersonControllerModule,
+    TransactionItemControllerModule,
     RouterModule.register([
       {
         path: 'user',
@@ -22,6 +24,12 @@ import { RouteParamEnum } from '@shared/route/route-param.enum';
               {
                 path: 'transaction',
                 module: TransactionControllerModule,
+                children: [
+                  {
+                    path: `:${RouteParamEnum.idTransaction}/transaction-item`,
+                    module: TransactionItemControllerModule,
+                  },
+                ],
               },
               {
                 path: 'person',

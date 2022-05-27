@@ -8,6 +8,13 @@ import { TransactionItemRepository } from '@repository/transaction-item.reposito
 
 @Entity({ customRepository: () => TransactionItemRepository })
 export class TransactionItemEntity extends BaseEntity {
+  constructor(id: string, value: number, date: Date) {
+    super();
+    this.id = id;
+    this.value = value;
+    this.date = date;
+  }
+
   @DefaultPrimaryKey()
   id!: string;
 

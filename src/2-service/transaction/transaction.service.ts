@@ -60,4 +60,11 @@ export class TransactionService {
     await this.userRepository.flush();
     return transaction;
   }
+
+  async getWithItems(idTransaction: string): Promise<TransactionEntity> {
+    return this.transactionRepository.findOneOrFail(idTransaction, {
+      populate: ['person', 'transactionItems'],
+      orderBy: [{ transactionItems: { date: 'DESC' } }, { transactionItems: { id: 'ASC' } }],
+    });
+  }
 }
