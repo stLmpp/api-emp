@@ -1,5 +1,5 @@
 import { InternalServerErrorException } from '@nestjs/common';
-import { isArray } from 'st-utils';
+import { isArray, round } from 'st-utils';
 
 import { TransactionEntity } from '@model/entity/transaction.entity';
 import { TransactionCardViewModel } from '@model/view-model/transaction/transaction-card.view-model';
@@ -32,7 +32,8 @@ export class TransactionEntityToTransactionCardViewModelMapper {
       viewModel.totalReceived += transactionItem.value;
     }
 
-    viewModel.totalToReceive = viewModel.total - viewModel.totalReceived;
+    viewModel.totalToReceive = round(viewModel.total - viewModel.totalReceived);
+    viewModel.totalReceived = round(viewModel.totalReceived);
 
     return viewModel;
   }

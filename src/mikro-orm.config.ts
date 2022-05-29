@@ -1,5 +1,4 @@
 import { LoadStrategy, Options } from '@mikro-orm/core';
-import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 
 import { NamingStrategy } from '@infrastructure/database/naming-strategy';
@@ -12,7 +11,7 @@ const logger = Logger.create('MikroORM');
 
 const pathMigrationsTs = './src/5-infrastructure/database/migrations' as const;
 
-const mikroOrmConfig: Options<PostgreSqlDriver> = {
+const mikroOrmConfig: Options = {
   host: environment.dbHost,
   port: environment.dbPort,
   user: environment.dbUsername,

@@ -18,7 +18,7 @@ export class TransactionItemEntity extends BaseEntity {
   @DefaultPrimaryKey()
   id!: string;
 
-  @Property()
+  @Property({ type: 'double' })
   value!: number;
 
   @Property()
