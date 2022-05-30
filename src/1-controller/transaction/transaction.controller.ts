@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { TransactionCreateDto } from '@model/dto/transaction/transaction-create.dto';
+import { TransactionDeleteParams } from '@model/dto/transaction/transaction-delete.params';
 import { TransactionWithItemsParams } from '@model/dto/transaction/transaction-with-items.params';
 import { TransactionParams } from '@model/dto/transaction/transaction.params';
 import { TransactionEntityToTransactionCardViewModelMapper } from '@model/mapping/transaction/transaction.entity-to-transaction-card.view-model.mapper';
@@ -35,5 +36,10 @@ export class TransactionController {
     return TransactionEntityToTransactionWithItemsViewModelMapper.map(
       await this.transactionService.getWithItems(idTransaction)
     );
+  }
+
+  @Delete(`:${RouteParamEnum.idTransaction}`)
+  async delete(@Param() { idTransaction }: TransactionDeleteParams): Promise<void> {
+    await this.transactionService.delete(idTransaction);
   }
 }

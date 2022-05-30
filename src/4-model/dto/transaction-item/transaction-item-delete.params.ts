@@ -3,12 +3,16 @@ import { IsDefined } from 'class-validator';
 import { IsDefaultId } from '@model/validation/is-default-id';
 import { IsUserId } from '@model/validation/is-user-id';
 
-export class TransactionWithItemsParams {
-  @IsDefaultId()
-  @IsDefined()
-  idTransaction!: string;
-
+export class TransactionItemDeleteParams {
   @IsDefined()
   @IsUserId()
   idUser!: string;
+  
+  @IsDefined()
+  @IsDefaultId()
+  idTransaction!: string;
+  
+  @IsDefined()
+  @IsDefaultId()
+  idTransactionItem!: string;
 }

@@ -1,4 +1,5 @@
 import {
+  Cascade,
   Collection,
   Entity,
   EntityRepositoryType,
@@ -63,7 +64,7 @@ export class TransactionEntity extends BaseEntity {
   @ManyToOne({ entity: () => PersonEntity, wrappedReference: true })
   person: IdentifiedReference<PersonEntity>;
 
-  @OneToMany({ entity: () => TransactionItemEntity, mappedBy: 'transaction' })
+  @OneToMany({ entity: () => TransactionItemEntity, mappedBy: 'transaction', cascade: [Cascade.REMOVE] })
   transactionItems = new Collection<TransactionItemEntity>(this);
 
   [EntityRepositoryType]?: TransactionRepository;

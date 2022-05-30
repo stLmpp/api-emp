@@ -22,4 +22,9 @@ export class TransactionItemService {
     await this.transactionItemRepository.flush();
     return transactionItem;
   }
+
+  async delete(idTransactionItem: string): Promise<void> {
+    const transactionItem = await this.transactionItemRepository.findOneOrFail(idTransactionItem);
+    await this.transactionItemRepository.removeAndFlush(transactionItem);
+  }
 }

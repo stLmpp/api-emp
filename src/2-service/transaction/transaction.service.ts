@@ -67,4 +67,11 @@ export class TransactionService {
       orderBy: [{ transactionItems: { date: 'DESC' } }, { transactionItems: { id: 'ASC' } }],
     });
   }
+
+  async delete(idTransaction: string): Promise<void> {
+    const transaction = await this.transactionRepository.findOneOrFail(idTransaction, {
+      populate: ['transactionItems'],
+    });
+    await this.transactionRepository.removeAndFlush(transaction);
+  }
 }
