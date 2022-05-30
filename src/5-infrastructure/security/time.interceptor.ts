@@ -4,7 +4,7 @@ import { random } from 'st-utils';
 
 @Injectable()
 export class TimeInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> | Promise<Observable<any>> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> | Promise<Observable<unknown>> {
     return next.handle().pipe(delayWhen(() => interval(random(25, 75))));
   }
 }

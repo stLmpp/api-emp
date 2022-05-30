@@ -3,20 +3,20 @@ export class EnvPropertyMetadata {
     public readonly propertyKey: string,
     public readonly names: string[],
     public readonly required: boolean,
-    public readonly defaultValue: any,
-    public readonly parser?: (value: any) => any
+    public readonly defaultValue: unknown,
+    public readonly parser?: (value: unknown) => unknown
   ) {}
 }
 
 export class EnvironmentMetadata {
-  private _store = new Map<string, EnvPropertyMetadata>();
+  private readonly _store = new Map<string, EnvPropertyMetadata>();
 
   add(key: string, value: EnvPropertyMetadata): this {
     this._store.set(key, value);
     return this;
   }
 
-  entries(): [string, EnvPropertyMetadata][] {
+  entries(): Array<[string, EnvPropertyMetadata]> {
     return [...this._store.entries()];
   }
 }

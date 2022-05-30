@@ -29,7 +29,7 @@ export class HandleErrorFilter extends BaseExceptionFilter {
     .set(DatabaseObjectNotFoundException, ({ message }) => new NotFoundException(message))
     .set(NotFoundError, ({ message }) => new NotFoundException(message));
 
-  override catch(exception: any, host: ArgumentsHost): void {
+  override catch(exception: unknown, host: ArgumentsHost): void {
     this._logger.error(exception);
     const applicationRef = this.applicationRef ?? this.httpAdapterHost?.httpAdapter;
     if (!applicationRef) {
@@ -53,7 +53,7 @@ export class HandleErrorFilter extends BaseExceptionFilter {
     host.switchToHttp().getResponse().status(status).json(response);
   }
 
-  isThrownError(exception: any): exception is HttpException {
+  isThrownError(exception: unknown): exception is HttpException {
     return exception instanceof HttpException;
   }
 
@@ -61,7 +61,7 @@ export class HandleErrorFilter extends BaseExceptionFilter {
     return exception;
   }
 
-  isMikroOrmError(exception: any): exception is DriverException {
+  isMikroOrmError(exception: unknown): exception is DriverException {
     return exception instanceof DriverException;
   }
 

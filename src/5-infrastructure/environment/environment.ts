@@ -28,7 +28,7 @@ export class Environment {
       } else {
         missingVariables.push(metadata.names.join('/'));
       }
-      (this as any)[metadata.propertyKey] = value;
+      (this as Record<string, unknown>)[metadata.propertyKey] = value;
     }
     if (missingVariables.length) {
       throw new Error('Missing required environment variables: \n' + missingVariables.join('\n'));

@@ -3,8 +3,8 @@ import { IdNormalizer } from '@shared/util/id-normalizer';
 export class IdGenerator {
   constructor(private readonly id: string, private readonly checkId: (id: string) => Promise<boolean>) {}
 
-  private _uniqueId = new Set<string>();
-  private _idNormalizer = new IdNormalizer(this.id).start();
+  private readonly _uniqueId = new Set<string>();
+  private readonly _idNormalizer = new IdNormalizer(this.id).start();
 
   async generate(): Promise<string> {
     const id = this._idNormalizer.toString();

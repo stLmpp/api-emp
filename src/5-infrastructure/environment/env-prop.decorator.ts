@@ -6,11 +6,11 @@ import { environmentMetadata, EnvPropertyMetadata } from './environment.metadata
 export interface EnvPropertyOptions {
   required?: boolean;
   name?: string | string[];
-  parser?: (value: any) => any;
-  defaultValue?: any;
+  parser?: (value: unknown) => unknown;
+  defaultValue?: unknown;
 }
 
-const defaultParserMap = new Map<any, (value: any) => any>([
+const defaultParserMap = new Map<unknown, (value: unknown) => unknown>([
   [Number, value => Number(value)],
   [Boolean, value => (isString(value) ? value === 'true' : !!value)],
 ]);
