@@ -17,9 +17,9 @@ export class TransactionItemService {
       populate: ['transactionItems'],
     });
     const id = await this.transactionItemRepository.generateId(idTransaction, dto.date);
-    const transactionItem = new TransactionItemEntity(id, dto.value, dto.date);
+    const transactionItem = new TransactionItemEntity(id, dto.value, dto.date, transaction);
     transaction.transactionItems.add(transactionItem);
-    await this.transactionItemRepository.flush();
+    await this.transactionRepository.flush();
     return transactionItem;
   }
 

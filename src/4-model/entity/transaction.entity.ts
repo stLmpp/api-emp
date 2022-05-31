@@ -46,7 +46,7 @@ export class TransactionEntity extends BaseEntity {
   @DefaultPrimaryKey()
   id: string;
 
-  @Property()
+  @Property({ type: 'double' })
   total: number;
 
   @Property({ length: 40 })
@@ -64,7 +64,7 @@ export class TransactionEntity extends BaseEntity {
   @ManyToOne({ entity: () => PersonEntity, wrappedReference: true })
   person: IdentifiedReference<PersonEntity>;
 
-  @OneToMany({ entity: () => TransactionItemEntity, mappedBy: 'transaction', cascade: [Cascade.REMOVE] })
+  @OneToMany({ entity: () => TransactionItemEntity, mappedBy: 'transaction', cascade: [Cascade.ALL] })
   transactionItems = new Collection<TransactionItemEntity>(this);
 
   [EntityRepositoryType]?: TransactionRepository;
